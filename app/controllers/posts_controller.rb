@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
-	
 
 	def index
-		@posts = Post.all
+		 @q= Post.ransack(params[:q])
+   		 @posts=@q.result(distinct: true).order("created_at DESC")
 	end
 
 	def new
@@ -36,6 +36,8 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+		@user = AdminUser.all
+		@comment= Comment.new(:post => @post)
 	end
 
 	def destroy	

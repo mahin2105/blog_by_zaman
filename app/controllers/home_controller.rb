@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
-  def new
+  
+  def index
+  	@posts = Post.all.order("created_at DESC")
   end
+
 end
